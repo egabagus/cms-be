@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Middleware\Cors;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Session\Middleware\StartSession;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -16,6 +18,12 @@ return Application::configure(basePath: dirname(__DIR__))
             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        ]);
+        $middleware->append(StartSession::class);
+        $middleware->append(Cors::class);
+        $middleware->statefulApi();
+        $middleware->validateCsrfTokens(except: [
+            'api/*'
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
