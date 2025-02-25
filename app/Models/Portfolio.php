@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class Portfolio extends Model
 {
@@ -13,4 +14,12 @@ class Portfolio extends Model
 
     public $timestamps = true;
     protected $guarded = [];
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function (Portfolio $data) {
+            $data->slug = Str::slug($data->title);
+        });
+    }
 }
