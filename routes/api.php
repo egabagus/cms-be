@@ -7,14 +7,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::post('login', [AuthController::class, 'login']);
-Route::post('logout', [AuthController::class, 'logout']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return response()->json(['data' => 'tes']);
     });
 
+    Route::post('logout', [AuthController::class, 'logout']);
     Route::prefix('/portfolio')->group(function () {
         Route::get('/data', [PortfolioController::class, 'data'])->name('portfolio.data');
+        Route::post('/store', [PortfolioController::class, 'store'])->name('portfolio.store');
     });
 });

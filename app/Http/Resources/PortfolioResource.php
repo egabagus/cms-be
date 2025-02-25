@@ -17,7 +17,7 @@ class PortfolioResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'title' => strtoupper($this->title),
+            'title' => $this->title,
             'description' => Str::limit($this->description, 50),
             'link' => $this->link ? url($this->link) : null,
             'status' => $this->status ? 'Active' : 'Inactive',
