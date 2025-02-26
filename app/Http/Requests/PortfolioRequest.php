@@ -24,6 +24,7 @@ class PortfolioRequest extends FormRequest
         return [
             'title' => 'required',
             'meta_desc' => 'required',
+            'tech' => 'required',
         ];
     }
 }

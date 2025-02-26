@@ -25,6 +25,10 @@ class PortfolioController extends Controller
         try {
             $new                = new Portfolio();
             $new->title         = $request->title;
+            $new->meta_desc         = $request->meta_desc;
+            $new->description         = $request->description;
+            $new->link         = $request->link;
+            $new->tech         = $request->tech;
             $new->save();
 
             return (new ApiSuccess())($new);
