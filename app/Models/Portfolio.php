@@ -26,6 +26,6 @@ class Portfolio extends Model
 
     public function technology(): BelongsToMany
     {
-        return $this->belongsToMany(Technology::class);
+        return $this->belongsToMany(Technology::class, 'portfolio_technology');
     }
 }
