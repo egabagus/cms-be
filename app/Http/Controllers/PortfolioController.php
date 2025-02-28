@@ -31,6 +31,8 @@ class PortfolioController extends Controller
             $new->tech         = $request->tech;
             $new->save();
 
+            $new->technology()->sync($request->technologies);
+
             return (new ApiSuccess())($new);
         } catch (\Throwable $th) {
             return (new ApiError())($th->getMessage());
