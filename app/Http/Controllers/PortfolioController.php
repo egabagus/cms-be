@@ -23,12 +23,17 @@ class PortfolioController extends Controller
     public function store(PortfolioRequest $request)
     {
         try {
-            $new                = new Portfolio();
-            $new->title         = $request->title;
-            $new->meta_desc         = $request->meta_desc;
-            $new->description         = $request->description;
+            $new               = new Portfolio();
+            $new->title        = $request->title;
+            $new->meta_desc    = $request->meta_desc;
+            $new->description  = $request->description;
             $new->link         = $request->link;
             $new->tech         = $request->tech;
+
+            // dd($request->file('thumbnail'));
+            $thumbnail = $request->file('thumbnail')->store('uploads', 'public');
+            $new->thumbnail    = $thumbnail;
+
             $new->save();
 
             $new->technology()->sync($request->technologies);
