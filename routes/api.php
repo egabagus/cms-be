@@ -19,6 +19,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('/portfolio')->group(function () {
         Route::get('/data', [PortfolioController::class, 'data'])->name('portfolio.data');
         Route::post('/store', [PortfolioController::class, 'store'])->name('portfolio.store');
+        Route::get('/{id}/detail', [PortfolioController::class, 'show'])->name('portfolio.detail');
     });
 
     Route::prefix('/technology')->group(function () {

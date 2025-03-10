@@ -20,6 +20,12 @@ class PortfolioController extends Controller
         return PortfolioResource::collection($data);
     }
 
+    public function show($id)
+    {
+        $data = Portfolio::find($id);
+        return (new ApiSuccess())($data);
+    }
+
     public function store(PortfolioRequest $request)
     {
         try {
