@@ -24,5 +24,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('/technology')->group(function () {
         Route::get('/data', [TechnologyController::class, 'data'])->name('technology.data');
+        Route::post('/store', [TechnologyController::class, 'store'])->name('technology.store');
+        Route::post('/delete', [TechnologyController::class, 'destroy'])->name('technology.destroy');
     });
 });
