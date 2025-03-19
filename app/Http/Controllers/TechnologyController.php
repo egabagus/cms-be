@@ -39,6 +39,25 @@ class TechnologyController extends Controller
         }
     }
 
+    public function update(int $id, TechnologyRequest $request)
+    {
+        DB::beginTransaction();
+        try {
+            $data = [
+                'name'          => $request->name,
+                'description'   => $request->description
+            ];
+
+            $update = Technology::find($id)->update($data);
+
+            DB::commit();
+            return (new ApiSuccess())($update);
+        } catch (Throwable $th) {
+            DB::rollBack();
+            return (new ApiError())($th->getMessage());
+        }
+    }
+
     public function destroy(Request $request)
     {
         DB::beginTransaction();
