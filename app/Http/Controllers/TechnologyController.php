@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TechnologiesExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TechnologyRequest;
 use App\Http\Resources\Api\ApiError;
@@ -10,6 +11,7 @@ use App\Http\Resources\TechnologyResource;
 use App\Models\Technology;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use Throwable;
 
 class TechnologyController extends Controller
@@ -70,5 +72,10 @@ class TechnologyController extends Controller
             DB::rollBack();
             return (new ApiError())($th->getMessage());
         }
+    }
+
+    public function export()
+    {
+        return Excel::download(new TechnologiesExport, 'techs.xlsx');
     }
 }

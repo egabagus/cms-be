@@ -4,7 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class Cors
 {
@@ -12,9 +13,13 @@ class Cors
     {
         $response = $next($request);
 
-        // Jika responsenya bukan tipe Response, ubah menjadi Response
+        if ($response instanceof BinaryFileResponse) {
+            return $response;
+        }
+
+        // Jika response bukan Response, buat instance baru
         if (!($response instanceof Response)) {
-            $response = new Response($response->getContent(), $response->status(), $response->headers->all());
+            $response = new Response($response->getContent(), $response->getStatusCode(), $response->headers->all());
         }
 
         // Atur header CORS

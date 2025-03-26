@@ -20,7 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ]);
         $middleware->append(StartSession::class);
-        $middleware->append(Cors::class);
+        // $middleware->append(Cors::class);
         $middleware->statefulApi();
         $middleware->validateCsrfTokens(except: [
             'api/*'

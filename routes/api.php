@@ -27,5 +27,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/store', [TechnologyController::class, 'store'])->name('technology.store');
         Route::post('/{id}/update', [TechnologyController::class, 'update'])->name('technology.update');
         Route::post('/delete', [TechnologyController::class, 'destroy'])->name('technology.destroy');
+        Route::get('/export', [TechnologyController::class, 'export'])->name('technology.export');
     });
 });
