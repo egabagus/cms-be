@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\PortfolioController;
+use App\Http\Controllers\SkillController;
 use App\Http\Controllers\TechnologyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,5 +29,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/{id}/update', [TechnologyController::class, 'update'])->name('technology.update');
         Route::post('/delete', [TechnologyController::class, 'destroy'])->name('technology.destroy');
         Route::get('/export', [TechnologyController::class, 'export'])->name('technology.export');
+    });
+
+    Route::prefix('/skill')->group(function () {
+        Route::get('/data', [SkillController::class, 'data'])->name('skill.data');
     });
 });
