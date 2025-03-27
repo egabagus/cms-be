@@ -33,5 +33,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('/skill')->group(function () {
         Route::get('/data', [SkillController::class, 'data'])->name('skill.data');
+        Route::post('/store', [SkillController::class, 'store'])->name('skill.store');
+        Route::post('/{id}/update', [SkillController::class, 'update'])->name('skill.update');
     });
 });

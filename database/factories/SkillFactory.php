@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\SkillLevelEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,7 +19,8 @@ class SkillFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'description' => $this->faker->sentence(8)
+            'description' => $this->faker->sentence(8),
+            'level' => fake()->randomElement(SkillLevelEnum::cases())->value,
         ];
     }
 }
